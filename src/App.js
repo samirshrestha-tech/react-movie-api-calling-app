@@ -5,6 +5,7 @@ import { SearchForm } from "./components/SearchForm";
 
 function App() {
   const [movieList, setMovieList] = useState([]);
+  const [id, setId] = useState("");
   const addToMovieList = (movie) => {
     setMovieList([...movieList, movie]);
   };
@@ -14,7 +15,10 @@ function App() {
     // const imdbId =
     if (window.confirm(`are you sure want to delete?`)) {
       const filteredArr = movieList.filter((item) => item.id !== id);
-      setMovieList(filteredArr);
+      setMovieList([]);
+
+      // setMovieList(filteredArr);
+      console.log(filteredArr);
     }
   };
 

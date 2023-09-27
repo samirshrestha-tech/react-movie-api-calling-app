@@ -4,6 +4,7 @@ import { fetchMovie } from "../utilities/axiosHelper";
 
 export const SearchForm = ({ addToMovieList, onDelete }) => {
   const [movie, setMovie] = useState({});
+  // console.log(movie.imdbID);
   const strRef = useRef("");
   const [error, setError] = useState("");
   const handleOnSubmit = async (e) => {
@@ -55,7 +56,12 @@ export const SearchForm = ({ addToMovieList, onDelete }) => {
           {error && <div className="alert alert-danger">{error}</div>}
 
           {movie?.imdbID && (
-            <CustomCard movie={movie} func={func} onDelete={onDelete} />
+            <CustomCard
+              movie={movie}
+              func={func}
+              onDelete={onDelete}
+              itemId={movie.imdbID}
+            />
           )}
         </div>
       </div>
