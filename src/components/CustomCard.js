@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CustomCard = ({ movie, func }) => {
+export const CustomCard = ({ movie, func, onDelete }) => {
   //   console.log(movie);
 
   return (
@@ -21,7 +21,9 @@ export const CustomCard = ({ movie, func }) => {
         )}
 
         <div className="d-grid mt-2">
-          <button className="btn btn btn-danger">Delete</button>
+          <button className="btn btn btn-danger" onClick={() => onDelete(item)}>
+            Delete
+          </button>
         </div>
       </div>
     </div>

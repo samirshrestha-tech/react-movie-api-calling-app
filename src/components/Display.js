@@ -18,7 +18,7 @@ export const Display = ({ movieList }) => {
             </button>
           </div>
 
-          <div className="mt-3">5 movies found!</div>
+          <div className="mt-3">{movieList.length} movies found!</div>
           <hr />
         </div>
       </div>

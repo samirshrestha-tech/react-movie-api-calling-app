@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { CustomCard } from "./CustomCard";
 import { fetchMovie } from "../utilities/axiosHelper";
 
-export const SearchForm = ({ addToMovieList }) => {
+export const SearchForm = ({ addToMovieList, onDelete }) => {
   const [movie, setMovie] = useState({});
   const strRef = useRef("");
   const [error, setError] = useState("");
@@ -13,6 +13,7 @@ export const SearchForm = ({ addToMovieList }) => {
     // geting the input field data in a unontrolled method using useRef()
     const str = strRef.current.value;
     const data = await fetchMovie(str);
+    console.log(data);
 
     if (data.Response === "True") {
       setMovie(data);
@@ -53,7 +54,9 @@ export const SearchForm = ({ addToMovieList }) => {
         <div className="col-md d-flex justify-content-center">
           {error && <div className="alert alert-danger">{error}</div>}
 
-          {movie?.imdbID && <CustomCard movie={movie} func={func} />}
+          {movie?.imdbID && (
+            <CustomCard movie={movie} func={func} onDelete={onDelete} />
+          )}
         </div>
       </div>
     </div>

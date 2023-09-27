@@ -9,6 +9,14 @@ function App() {
     setMovieList([...movieList, movie]);
   };
   console.log(movieList);
+  // to update tomorrow on searchform instead of app.js as the data is in the search form
+  const handleOnDelete = (id) => {
+    // const imdbId =
+    if (window.confirm(`are you sure want to delete?`)) {
+      const filteredArr = movieList.filter((item) => item.id !== id);
+      setMovieList(filteredArr);
+    }
+  };
 
   return (
     <div className="wrapper bg-dark text-warning min-vh-100">
@@ -24,7 +32,7 @@ function App() {
         <hr />
 
         {/* search area  */}
-        <SearchForm addToMovieList={addToMovieList} />
+        <SearchForm addToMovieList={addToMovieList} onDelete={handleOnDelete} />
 
         {/* =>form */}
 
