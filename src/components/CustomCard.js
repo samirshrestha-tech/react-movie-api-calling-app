@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CustomCard = ({ movie, func, onDelete, itemId }) => {
+export const CustomCard = ({ movie, func, deleteFun }) => {
   //   console.log(movie);
 
   return (
@@ -23,7 +23,7 @@ export const CustomCard = ({ movie, func, onDelete, itemId }) => {
         <div className="d-grid mt-2">
           <button
             className="btn btn btn-danger"
-            onClick={() => onDelete(itemId)}
+            onClick={() => deleteFun(movie.imdbID)}
           >
             Delete
           </button>

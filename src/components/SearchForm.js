@@ -1,12 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CustomCard } from "./CustomCard";
 import { fetchMovie } from "../utilities/axiosHelper";
+import randomGenerator from "../utilities/randomstr";
 
-export const SearchForm = ({ addToMovieList, onDelete }) => {
+export const SearchForm = ({ addToMovieList }) => {
   const [movie, setMovie] = useState({});
   // console.log(movie.imdbID);
   const strRef = useRef("");
   const [error, setError] = useState("");
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     setMovie({});
@@ -22,6 +24,10 @@ export const SearchForm = ({ addToMovieList, onDelete }) => {
       setError(data.Error);
     }
   };
+
+  const handleOnDelete = () => {
+    setMovie({});
+  };
   // console.log(movie);
   // uplifiting the function
   const func = (mode) => {
@@ -30,6 +36,21 @@ export const SearchForm = ({ addToMovieList, onDelete }) => {
     setMovie({});
     strRef.current.value = "";
   };
+
+  useEffect(() => {
+    const randChar = randomGenerator();
+
+    (async () => {
+      const randMovie = await fetchMovie(randChar);
+      setMovie(randMovie);
+    })();
+    // fun();)
+    // const fun = async () => {
+    //   const randMovie = await fetchMovie(randChar);
+    //   setMovie(randMovie);
+    // };
+    // fun();
+  }, []);
 
   return (
     <div className="bg-black p-5 rounded shadow-lg">
@@ -54,14 +75,8 @@ export const SearchForm = ({ addToMovieList, onDelete }) => {
         </div>
         <div className="col-md d-flex justify-content-center">
           {error && <div className="alert alert-danger">{error}</div>}
-
           {movie?.imdbID && (
-            <CustomCard
-              movie={movie}
-              func={func}
-              onDelete={onDelete}
-              itemId={movie.imdbID}
-            />
+            <CustomCard movie={movie} func={func} deleteFun={handleOnDelete} />
           )}
         </div>
       </div>

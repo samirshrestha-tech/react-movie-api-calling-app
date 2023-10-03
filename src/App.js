@@ -5,21 +5,34 @@ import { SearchForm } from "./components/SearchForm";
 
 function App() {
   const [movieList, setMovieList] = useState([]);
+
   // const [id, setId] = useState("");
   const addToMovieList = (movie) => {
-    setMovieList([...movieList, movie]);
+    const filArr = movieList.filter((item) => item.imdbID !== movie.imdbID);
+    setMovieList([...filArr, movie]);
   };
   console.log(movieList);
   // to update tomorrow on searchform instead of app.js as the data is in the search form
-  const handleOnDelete = (id) => {
+  // const handleOnDelete = (id) => {
+  //   // const imdbId =
+  //   if (window.confirm(`are you sure want to delete?`)) {
+  //     const filteredArr = movieList.filter((item) => item.imdbId !== id);
+  //     // setMovieList([]);
+  //     console.log(movieList);
+
+  //     setMovieList(filteredArr);
+  //     console.log(filteredArr);
+  //   }
+  // };
+  const handleOnDelete = (imdbID) => {
     // const imdbId =
     if (window.confirm(`are you sure want to delete?`)) {
-      const filteredArr = movieList.filter((item) => item.id !== id);
+      const filteredArr = movieList.filter((movie) => movie.imdbID !== imdbID);
       // setMovieList([]);
-      console.log(movieList);
+      // console.log(movieList);
 
       setMovieList(filteredArr);
-      console.log(filteredArr);
+      // console.log(filteredArr);
     }
   };
 
@@ -37,7 +50,7 @@ function App() {
         <hr />
 
         {/* search area  */}
-        <SearchForm addToMovieList={addToMovieList} onDelete={handleOnDelete} />
+        <SearchForm addToMovieList={addToMovieList} />
 
         {/* =>form */}
 
@@ -46,7 +59,7 @@ function App() {
         {/* movie list section */}
         {/* =>buttons */}
         {/* =>cards */}
-        <Display movieList={movieList} />
+        <Display movieList={movieList} handleOnDelete={handleOnDelete} />
       </div>
     </div>
   );
