@@ -53,7 +53,7 @@ export const Display = ({ movieList, handleOnDelete }) => {
       </div>
       <div className="row ">
         <div className="col d-flex flex-wrap gap-3 justify-content-between">
-          {movieList.map((item, i) => (
+          {displayMovie.map((item, i) => (
             <CustomCard key={i} movie={item} deleteFun={handleOnDelete} />
           ))}
         </div>
